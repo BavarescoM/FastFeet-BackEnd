@@ -18,12 +18,12 @@ class Recipient extends Model {
     );
     return this;
   }
-  static associate(models) {
-    this.belongsTo(models.File, {
-      foreignKey: "recipient_id",
-      as: "recipient",
-    });
-  }
+  // static associate(models) {
+  //   this.belongsTo(models.File, {
+  //     foreignKey: "file_id",
+  //     as: "recipient_avatar_id",
+  //   });
+  // }
 }
 
 export default Recipient;
