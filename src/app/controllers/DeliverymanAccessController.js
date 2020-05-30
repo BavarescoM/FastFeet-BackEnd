@@ -15,8 +15,8 @@ class DeliverymanAccessController {
   }
   async start(req, res) {
     let date = new Date();
-    const sun = await isSabado(date);
-    if (sun) {
+    const satDay = await isSabado(date);
+    if (satDay) {
       return res.json({
         error: "Expediente aos sabados das 8:00hrs ao 12:00hrs",
       });
@@ -48,7 +48,14 @@ class DeliverymanAccessController {
 
     return res.json({ message: "Libera para a entrega" });
   }
-  async end(req, res) {}
+  async end(req, res) {
+    const order = await Order.findByPk(req.params.id);
+    order.update({
+      end_date: new Date(),
+      file_id: req.body.file_id,
+    });
+    return res.json({ message: `Entrega ${order} encerada` });
+  }
 }
 
 export default new DeliverymanAccessController();

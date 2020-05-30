@@ -10,6 +10,7 @@ import OrderController from "./app/controllers/OrderController";
 
 import authMiddleware from "./app/middlewares/auth";
 import DeliverymanAccessController from "./app/controllers/DeliverymanAccessController";
+import OrderWithProblemController from "./app/controllers/OrderWithProblemController";
 
 const routes = new Router();
 
@@ -17,9 +18,12 @@ const upload = multer(multerConfig);
 
 routes.post("/sessions", SessionController.store);
 
-routes.put("/deliverymanaccess/:id", DeliverymanAccessController.start);
-routes.put("/deliverymanaccess/:id", DeliverymanAccessController.end);
+routes.get("/problems/:id", OrderWithProblemController.index);
+routes.post("/problems/:id", OrderWithProblemController.store);
+routes.put("/problems/:id", OrderWithProblemController.cancel);
 
+routes.put("/deliverymanstart/:id", DeliverymanAccessController.start);
+routes.put("/deliverymanend/:id", DeliverymanAccessController.end);
 routes.get(
   "/deliverymanaccess/:id/deliveries",
   DeliverymanAccessController.index
