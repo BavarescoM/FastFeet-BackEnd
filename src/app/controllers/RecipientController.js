@@ -1,4 +1,5 @@
 import Recipient from "../models/Recipient";
+
 import { Op } from "sequelize";
 
 class RecipientsController {
